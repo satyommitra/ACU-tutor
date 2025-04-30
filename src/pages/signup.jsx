@@ -20,7 +20,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/auth/signup', formData); // ✅ backend route matches
+      const res = await axios.post('http://localhost:5050/api/auth/signup', formData);
       console.log(res.data);
       alert('Signup successful!');
       navigate('/login'); // after signup, redirect to login page
@@ -81,6 +81,13 @@ const Signup = () => {
 };
 
 export default Signup;
+
+
+
+
+
+
+
 
 
 

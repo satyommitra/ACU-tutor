@@ -9,6 +9,7 @@ import bcrypt from 'bcryptjs';
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 12);
 
   // Step 1: Check if the user already exists
   const userExists = await User.findOne({ email });

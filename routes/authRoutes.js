@@ -1,9 +1,7 @@
-// src/routes/authRoutes.js
-
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import User from '/Users/satyommitra/Downloads/Project-main/models/User.js';
 
 const router = express.Router();
 
@@ -23,15 +21,19 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // 3. Create and save new user
-    const newUser = new User({ name, email, password });
+    // 3. Hash the password before saving the user
+    const hashedPassword = await bcrypt.hash(password, 12);  // Hash password
+
+    // 4. Create and save new user
+    const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
 
-    // 4. Generate token
+    // 5. Generate token
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: '1d',
     });
 
+    // Send the response with the user data and token
     res.status(201).json({
       message: 'User registered successfully',
       token,
@@ -39,8 +41,6 @@ router.post('/signup', async (req, res) => {
         id: newUser._id,
         name: newUser.name,
         email: newUser.email,
-        progress: newUser.progress,
-        points: newUser.points,
       },
     });
 
@@ -84,8 +84,6 @@ router.post('/login', async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        progress: user.progress,
-        points: user.points,
       },
     });
 
@@ -95,7 +93,8 @@ router.post('/login', async (req, res) => {
   }
 });
 
-export default router; // ✅ Fixes the import issue in server.js
+export default router;
+
 
 
 

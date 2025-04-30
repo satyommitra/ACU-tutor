@@ -11,7 +11,7 @@ import Banner2 from "./components/Banner/Banner2";
 import Footer from "./components/Footer/Footer";
 
 import Login from "/Users/satyommitra/Downloads/Project-main/src/pages/login.jsx";
-import Signup from "/Users/satyommitra/Downloads/Project-main/src/pages/signup.jsx";
+import Signup from "./pages/Signup";
 import Dashboard from "/Users/satyommitra/Downloads/Project-main/src/pages/dashboard.jsx";
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
       <Routes>
         {/* Landing Page (Home) */}
         <Route 
-          path="/" 
+          path="" 
           element={
             <main className="overflow-x-hidden bg-white text-dark">
               <Hero />
