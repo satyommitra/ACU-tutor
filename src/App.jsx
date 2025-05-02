@@ -9,7 +9,8 @@ import Banner from "./components/Banner/Banner";
 import Subscribe from "./components/Subscribe/Subscribe";
 import Banner2 from "./components/Banner/Banner2";
 import Footer from "./components/Footer/Footer";
-
+import DashboardAI from './pages/DashboardAI';
+import DashboardProgress from './pages/DashboardProgress';
 import Login from "/Users/satyommitra/Downloads/Project-main/src/pages/login.jsx";
 import Signup from "./pages/Signup";
 import Dashboard from "/Users/satyommitra/Downloads/Project-main/src/pages/dashboard.jsx";
@@ -36,6 +37,9 @@ const App = () => {
         {/* Authentication Pages */}
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/ai" element={<DashboardAI />} />
+        <Route path="/dashboard/progress" element={<DashboardProgress />} />
 
         {/* Protected or User Pages */}
         <Route path="/dashboard" element={<Dashboard />} />
