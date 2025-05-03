@@ -15,6 +15,9 @@ import Login from "/Users/satyommitra/Downloads/Project-main/src/pages/login.jsx
 import Signup from "./pages/Signup";
 import Dashboard from "/Users/satyommitra/Downloads/Project-main/src/pages/dashboard.jsx";
 import AiPage from './pages/AiPage';
+import Progress from './pages/Progress';
+import Practice from './pages/Practice';
+import Quiz from './pages/Quiz';
 
 const App = () => {
   return (
@@ -42,7 +45,9 @@ const App = () => {
         <Route path="/dashboard/ai" element={<DashboardAI />} />
         <Route path="/dashboard/progress" element={<DashboardProgress />} />
         <Route path="/dashboard/ai" element={<AiPage />} />
-
+        <Route path="/dashboard/progress" element={<Progress />} />
+        <Route path="/dashboard/practice" element={<Practice />} />
+        <Route path="/dashboard/quiz" element={<Quiz />} />
         {/* Protected or User Pages */}
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js'; // ✅ correct relative path and extension
 import aiRoutes from './routes/aiRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ app.use(cors({
 // ✅ Routes
 app.use('/api/ai', aiRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('✅ API is running...');

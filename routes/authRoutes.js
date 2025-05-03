@@ -106,7 +106,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// ✅ Route: GET /api/auth/me (Protected route to get current user)
+// ✅ Route: GET /api/auth/me
 router.get('/me', authenticateToken, async (req, res) => {
   try {
     res.json({
@@ -122,7 +122,33 @@ router.get('/me', authenticateToken, async (req, res) => {
   }
 });
 
+// ✅ Route: GET /api/auth/progress
+// ✅ Route: GET /api/auth/progress
+router.get('/progress', authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({
+      level: user.level || 1,
+      xp: user.xp || 0,
+      badges: user.badges || [],
+      streak: user.streak || 0,
+      completedQuizzes: user.completedQuizzes || [],
+      weakTopics: user.weakTopics || [],
+      activityLog: user.activityLog || [],
+    });
+  } catch (err) {
+    console.error('Progress fetch error:', err);
+    res.status(500).json({ message: 'Failed to fetch progress data' });
+  }
+});
+
+
 export default router;
+
 
 
 
