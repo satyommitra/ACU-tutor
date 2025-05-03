@@ -14,6 +14,7 @@ import DashboardProgress from './pages/DashboardProgress';
 import Login from "/Users/satyommitra/Downloads/Project-main/src/pages/login.jsx";
 import Signup from "./pages/Signup";
 import Dashboard from "/Users/satyommitra/Downloads/Project-main/src/pages/dashboard.jsx";
+import AiPage from './pages/AiPage';
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/ai" element={<DashboardAI />} />
         <Route path="/dashboard/progress" element={<DashboardProgress />} />
+        <Route path="/dashboard/ai" element={<AiPage />} />
 
         {/* Protected or User Pages */}
         <Route path="/dashboard" element={<Dashboard />} />
