@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import AiChatbot from '../../src/pages/AiChatbot';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [xpPercentage, setXpPercentage] = useState(0);
+  const [chatbotLoading, setChatbotLoading] = useState(false);
 
   const topics = [
     'Algebra',
@@ -154,10 +156,15 @@ const Dashboard = () => {
           animate={{ opacity: 1 }}
         >
           <h2 className="text-2xl font-bold text-indigo-300 mb-2">🤖 TutorBot</h2>
-          <p className="text-sm text-slate-300 mb-4">Ask anything or get suggestions instantly.</p>
-          <div className="bg-black bg-opacity-30 p-4 rounded-lg">
-            <p className="text-sm italic text-slate-400">"Hi {userData.name}, ready to review Geometry or take a quick quiz?"</p>
-          </div>
+          <p className="text-sm text-slate-300 mb-4">
+            Ask anything or get help on a topic you're stuck on.
+          </p>
+
+          {chatbotLoading ? (
+            <div className="text-center text-white">Loading TutorBot...</div>
+          ) : (
+            <AiChatbot setLoading={setChatbotLoading} />
+          )}
         </motion.div>
 
         {/* Topics Roadmap */}
@@ -198,6 +205,7 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
 
 

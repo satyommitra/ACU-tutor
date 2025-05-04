@@ -11,13 +11,14 @@ import Banner2 from "./components/Banner/Banner2";
 import Footer from "./components/Footer/Footer";
 import DashboardAI from './pages/DashboardAI';
 import DashboardProgress from './pages/DashboardProgress';
-import Login from "/Users/satyommitra/Downloads/Project-main/src/pages/login.jsx";
+import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Dashboard from "/Users/satyommitra/Downloads/Project-main/src/pages/dashboard.jsx";
+import Dashboard from "./pages/Dashboard";
 import AiPage from './pages/AiPage';
 import Progress from './pages/Progress';
 import Practice from './pages/Practice';
 import Quiz from './pages/Quiz';
+import AiChatbot from './pages/AiChatbot';
 
 const App = () => {
   return (
@@ -25,7 +26,7 @@ const App = () => {
       <Routes>
         {/* Landing Page (Home) */}
         <Route 
-          path="" 
+          path="/" 
           element={
             <main className="overflow-x-hidden bg-white text-dark">
               <Hero />
@@ -41,19 +42,23 @@ const App = () => {
         {/* Authentication Pages */}
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+
+        {/* Dashboard and Protected Pages */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/ai" element={<DashboardAI />} />
         <Route path="/dashboard/progress" element={<DashboardProgress />} />
-        <Route path="/dashboard/ai" element={<AiPage />} />
-        <Route path="/dashboard/progress" element={<Progress />} />
-        <Route path="/dashboard/practice" element={<Practice />} />
-        <Route path="/dashboard/quiz" element={<Quiz />} />
-        {/* Protected or User Pages */}
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/ai/chatbot" element={<AiChatbot />} />
+        <Route path="/dashboard/ai/quiz" element={<Quiz />} />
+        <Route path="/dashboard/ai/practice" element={<Practice />} />
+        
+        {/* Additional AI and Progress Pages */}
+        <Route path="/ai" element={<AiPage />} />
+        <Route path="/progress" element={<Progress />} />
       </Routes>
     </Router>
   );
 };
 
 export default App;
+
 
