@@ -13,15 +13,15 @@ const Dashboard = () => {
   const [chatbotLoading, setChatbotLoading] = useState(false);
 
   const topics = [
-    'Algebra',
-    'Geometry',
-    'Probability',
+    'Biology',
+    'Physics',
+    'Computer Science',
     'Statistics',
     'Trigonometry',
     'Calculus',
-    'Number Theory',
+    'History',
     'Logic & Reasoning',
-    'Data Interpretation',
+    'Programming',
   ];
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Dashboard = () => {
       const token = localStorage.getItem('token');
       if (!token) {
         alert('Please login first!');
-        navigate('/login');
+        window.location.href = 'http://localhost:5173/';
         return;
       }
 
@@ -40,7 +40,7 @@ const Dashboard = () => {
           },
         });
         setUserData(res.data);
-        setXpPercentage((res.data.xp % 1000) / 10); // Calculate XP percentage for progress bar
+        setXpPercentage((res.data.xp % 1000) / 10); // XP percentage for progress bar
       } catch (err) {
         setError('Failed to load user data.');
         console.error(err);
@@ -50,18 +50,21 @@ const Dashboard = () => {
     };
 
     fetchUserData();
-  }, [navigate]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     alert('Logged out successfully!');
-    navigate('/login');
+    window.location.href = 'http://localhost:5173/';
   };
 
   const handleDailyGoalStart = () => {
-    navigate('/practice');
+    window.location.href = 'http://localhost:8501/';
   };
-  
+
+  const handleTopicNavigation = (topic) => {
+    window.location.href = `http://localhost:8501/?topic=${encodeURIComponent(topic)}`;
+  };
 
   if (loading) {
     return (
@@ -81,7 +84,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 to-black text-white font-poppins overflow-hidden">
-      {/* ACU Tutor and Logout at the top */}
+      {/* Header */}
       <div className="flex justify-between items-center p-6 bg-black bg-opacity-60">
         <motion.h2
           className="text-4xl font-bold text-indigo-400"
@@ -99,9 +102,9 @@ const Dashboard = () => {
         </button>
       </div>
 
-      {/* Main Content */}
+      {/* Content */}
       <main className="flex-1 p-10 overflow-y-auto">
-        {/* Top Row: XP, Level, Daily Goal */}
+        {/* Top Row */}
         <div className="grid md:grid-cols-3 gap-6 mb-10">
           <motion.div
             className="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 rounded-xl shadow-lg"
@@ -150,7 +153,7 @@ const Dashboard = () => {
           </motion.div>
         </div>
 
-        {/* AI Assistant Panel */}
+        {/* AI Assistant */}
         <motion.div
           className="bg-white bg-opacity-5 backdrop-blur-lg p-6 rounded-xl shadow-xl mb-10"
           initial={{ opacity: 0 }}
@@ -168,7 +171,7 @@ const Dashboard = () => {
           )}
         </motion.div>
 
-        {/* Topics Roadmap */}
+        {/* Topics */}
         <motion.div
           className="grid md:grid-cols-3 gap-6"
           initial="hidden"
@@ -183,7 +186,6 @@ const Dashboard = () => {
               className="bg-gradient-to-br from-slate-700 to-slate-800 p-5 rounded-xl shadow-md text-center hover:scale-105 transition"
               whileHover={{ scale: 1.05 }}
             >
-              {/* Animated Topic Icon */}
               <motion.i
                 className="fas fa-book text-xl mb-2"
                 whileHover={{ rotate: 360 }}
@@ -192,7 +194,7 @@ const Dashboard = () => {
               <h3 className="text-lg font-bold mb-2">{topic}</h3>
               <p className="text-sm text-slate-300">📘 Learn and master with practice & AI.</p>
               <button
-                onClick={() => navigate(`/dashboard/practice?topic=${encodeURIComponent(topic)}`)}
+                onClick={() => handleTopicNavigation(topic)}
                 className="mt-4 bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg"
               >
                 Go to {topic}
@@ -206,6 +208,7 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
 
 
